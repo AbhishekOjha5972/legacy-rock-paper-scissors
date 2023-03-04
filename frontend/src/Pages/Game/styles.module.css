@@ -1,0 +1,89 @@
+*{
+    box-sizing: border-box;
+    margin: 0px;
+    padding: 0px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+.game_main_container{
+    height: 90%;
+    width: 90%;
+    border-radius: 10px;
+    background-color:#4327969c;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    position: relative;
+}
+
+.game_container{
+    padding: 5px;
+    background-color: yellow !important;
+    display: flex;
+    justify-content: space-between;
+    align-items:  center;
+    background-size: cover !important;
+    background-repeat: no-repeat !important;
+    background-position: center center !important;
+    border-radius: 10px;
+}
+
+.game_leftChild,
+.game_rightChild{
+    height: 500px;
+    width: 500px;
+    display: flex;
+    align-items: center; 
+    position: relative;
+}
+.game_leftChild > img{
+    border-radius: 50%;
+}
+.game_leftChild > div{
+    position: absolute;
+    height: 40px;
+    width: 150px;
+    top: 1%;
+    left: 2%;
+    background-size: cover !important;
+    background-repeat: no-repeat !important;
+    background-position: center center !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    color: white;
+    font-size: 18px;
+}
+.game_rightChild > img{
+    border-radius: 50%;
+}
+.game_rightChild > div{
+    position: absolute;
+    height: 40px;
+    width: 150px;
+    font-weight: 600;
+    color: white;
+    font-size: 18px;
+    top: 1%;
+    right: 2%;
+    background-size: cover !important;
+    background-repeat: no-repeat !important;
+    background-position: center center !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.buttonDiv{
+    position: absolute;
+    display: flex;
+    height: 60px;
+    justify-content: space-around;
+    align-items: center;
+    border: 2px solid blue;
+    width: 60%;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: 0 auto
+
+}
