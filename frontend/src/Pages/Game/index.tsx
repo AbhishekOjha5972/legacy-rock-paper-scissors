@@ -21,8 +21,7 @@ const Game = () => {
     left_image_waiting_to_opponent
   );
   const [rightImage, setRightImage] = useState<string>(right_image);
-  console.log("rightImage:", rightImage);
-  console.log("leftImage:", leftImage);
+  const [isDisable,setIsDisable] = useState<boolean>(true)
 
   useEffect(() => {
     if (currentRoom?.vacant == false) {
@@ -34,6 +33,7 @@ const Game = () => {
       let pl2 = Object.keys(currentRoom.players)[1];
       console.log("pl1:", pl1);
       console.log("pl2:", pl2);
+      setIsDisable(currentRoom.players[localSocket.id].chance)
 
       if (pl1 && pl2) {
         if (
@@ -58,8 +58,6 @@ const Game = () => {
              if(currentRoom?.players[pl2].choosen == "scissors"){
               setRightImage(scissors_right_hand);
             }
-          // }
-          // alert("home");
         }
       }
 
@@ -78,6 +76,10 @@ const Game = () => {
           <div style={{background:`url(${name_show_bg})`}}>
             <span>{playerOne?.user_name}</span>
           </div>
+          <p>
+          <span>MOVES: {playerOne?.lives}</span>
+          <span>SCORE: {playerOne?.score}</span>
+          </p>
         </div>
         <div className={styles.game_rightChild}>
           <img
@@ -90,6 +92,10 @@ const Game = () => {
           <div style={{background:`url(${name_show_bg})`}}>
           <span>{playerTwo?.user_name}</span>
           </div>
+          <p>
+          <span>MOVES: {playerTwo?.lives}</span>
+          <span>SCORE: {playerTwo?.score}</span>
+          </p>
         </div>
       </div>
       <div className={styles.buttonDiv}>
@@ -97,27 +103,27 @@ const Game = () => {
           onClick={() => {
             handleUpdateRoom("rock");
           }}
-          isDisabled={currentRoom && !currentRoom.players[localSocket.id].choosen}
+          isDisabled={!isDisable}
         >
-          Rock
+          ROCK
         </Button>
 
         <Button
           onClick={() => {
             handleUpdateRoom("paper");
           }}
-          isDisabled={currentRoom && !currentRoom.players[localSocket.id].choosen}
+          isDisabled={!isDisable}
         >
-          Paper
+          PAPER
         </Button>
 
         <Button
           onClick={() => {
             handleUpdateRoom("scissors");
           }}
-          isDisabled={currentRoom && !currentRoom.players[localSocket.id].choosen}
+          isDisabled={!isDisable}
         >
-          Scissors
+          SCISSORS
         </Button>
       </div>
     </div>
