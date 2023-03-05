@@ -1,6 +1,6 @@
 import { createContext, useEffect, useState } from "react";
 import { io } from "socket.io-client";
-import { IResult, IRooms, IUser } from "../Constants/constants";
+import { INewResult, IResult, IRooms, IUser } from "../Constants/constants";
 import { useNavigate } from "react-router-dom";
 
 type contextType = {
@@ -13,7 +13,9 @@ type contextType = {
   playerTwo?: IUser;
   currentRoom?: IRooms;
   handleUpdateRoom?: (selectedOption: string) => void;
-  result?:IResult
+  result?:IResult;
+  newResult?:INewResult;
+
 };
 
 export const SocketContext = createContext<contextType | null>(null);
@@ -27,6 +29,7 @@ const SocketContextProvider = ({ children }: { children: React.ReactNode }) => {
   const [currentRoom, setCurrentRoom] = useState<IRooms>();
   const [error, setError] = useState<boolean>(false);
   const [result, setResult] = useState<IResult>();
+  const [newResult, setNewResult] = useState<INewResult>();
   const [responseMessage, setResponseMessage] = useState<string>();
   let flag  = true
 
@@ -83,26 +86,71 @@ const SocketContextProvider = ({ children }: { children: React.ReactNode }) => {
     const pl2 = Object.keys(currentRoom?.players)[1];
 
 
-    if (currentRoom?.players[pl1].score > currentRoom?.players[pl2].score) {
-      setResult({
-        ...result,
-        status: "winner",
-        winner: currentRoom?.players[pl1],
-        looser: currentRoom?.players[pl2],
-      });
+    // if (currentRoom?.players[pl1].score > currentRoom?.players[pl2].score) {
+    //   setResult({
+    //     ...result,
+    //     status: "winner",
+    //     winner: currentRoom?.players[pl1],
+    //     looser: currentRoom?.players[pl2],
+    //   });
       
-    } else if (
+    // } else if (
+    //   currentRoom?.players[pl2].score > currentRoom?.players[pl1].score
+    // ) {
+    //   setResult({
+    //     ...result,
+    //     status: "winner",
+    //     winner: currentRoom?.players[pl2],
+    //     looser: currentRoom?.players[pl1],
+    //   });
+    // } else {
+    //   setResult({ ...result, status: "tie", tie: currentRoom });
+    // }
+
+    //! test everything with new result formate
+    if (currentRoom?.players[pl1].score > currentRoom?.players[pl2].score) {
+      setNewResult({
+        ...newResult,
+        tie_status:false,
+        tie_data:null,
+        socket_data:{
+          [pl1]:{
+            status: "winner",
+            info: currentRoom?.players[pl1],
+          },
+          [pl2]:{
+            status:"looser",
+            info:currentRoom?.players[pl2]
+          }
+        }
+      })
+  }
+  else if (
       currentRoom?.players[pl2].score > currentRoom?.players[pl1].score
     ) {
-      setResult({
-        ...result,
-        status: "winner",
-        winner: currentRoom?.players[pl2],
-        looser: currentRoom?.players[pl1],
-      });
-    } else {
-      setResult({ ...result, status: "tie", tie: currentRoom });
+      setNewResult({
+        ...newResult,
+        tie_status:false,
+        tie_data:null,
+        socket_data:{
+          [pl1]:{
+            status: "looser",
+            info: currentRoom?.players[pl1],
+          },
+          [pl2]:{
+            status:"winner",
+            info:currentRoom?.players[pl2]
+          }
+        }
+      })
+
     }
+
+    else {
+        setNewResult({ ...newResult, tie_status:true, tie_data: currentRoom });
+      }
+
+      
     setPlayerOne(undefined)
     setPlayerTwo(undefined)
     flag=false
@@ -188,7 +236,8 @@ const SocketContextProvider = ({ children }: { children: React.ReactNode }) => {
         playerTwo,
         currentRoom,
         handleUpdateRoom,
-        result
+        result,
+        newResult
       }}
     >
       {children}

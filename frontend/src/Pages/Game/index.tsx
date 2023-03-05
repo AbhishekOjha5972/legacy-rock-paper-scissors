@@ -39,7 +39,6 @@ const Game = () => {
         if (
           currentRoom?.players[pl1].lives == currentRoom?.players[pl2].lives
         ) {
-          // if (currentRoom?.players[pl1] == pl1) {
             if (currentRoom?.players[pl1].choosen == "rock") {
               setLeftImage(rock_left_hand);
             } 

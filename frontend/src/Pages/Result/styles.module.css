@@ -1,0 +1,10 @@
+.result_main_container{
+    height: 90%;
+    width: 90%;
+    border-radius: 10px;
+    background-color:#43279667 !important;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    background-size: cover !important;
+    background-repeat: no-repeat !important;
+    background-position: center center !important;
+}

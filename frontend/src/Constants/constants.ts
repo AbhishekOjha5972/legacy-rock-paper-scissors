@@ -26,3 +26,9 @@ export interface IResult{
     looser?:IUser,
     tie?:IRooms
 }
+
+export interface INewResult{
+    tie_status:boolean,
+    tie_data?:IRooms|null
+    socket_data?:{}|any
+}
