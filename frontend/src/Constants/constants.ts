@@ -32,3 +32,8 @@ export interface INewResult{
     tie_data?:IRooms|null
     socket_data?:{}|any
 }
+
+export interface IWinnerAndUser{
+    info?:IUser,
+    status?:string
+}
