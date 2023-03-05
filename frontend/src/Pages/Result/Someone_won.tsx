@@ -1,19 +1,17 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { SocketContext } from '../../context/Socket.Context'
-import styles from "./styles.module.css"
-import { Button } from '@chakra-ui/react'
-import { Link } from 'react-router-dom'
 import {FaCrown , FaSadCry} from "react-icons/fa"
+import styles from "./styles.module.css"
+import { Link } from 'react-router-dom'
 
 
 import you_won from "../../assets/Images/win.png"
 import you_lose from "../../assets/Images/lose.png"
+import { IWinnerAndUser } from '../../Constants/constants'
 import left_hand_winner from "../../assets/Images/left_hand_winner.jpg";
 import left_hand_looser from "../../assets/Images/left_hand_looser.jpg";
 import right_hand_winner from "../../assets/Images/right_hand_winner.jpg";
 import right_hand_looser from "../../assets/Images/right_hand_looser.jpg";
-import { IWinnerAndUser } from '../../Constants/constants'
-
 
 
 const Someone_won = () => {

@@ -1,16 +1,9 @@
 import React, { useContext, useState,useEffect } from 'react'
 import { SocketContext } from '../../context/Socket.Context'
 import styles from "./styles.module.css"
-import { IUser, IWinnerAndUser } from '../../Constants/constants'
+import { IUser} from '../../Constants/constants'
 import { Link } from 'react-router-dom'
-import {FaCrown , FaSadCry} from "react-icons/fa"
-
-import you_won from "../../assets/Images/win.png"
-import you_lose from "../../assets/Images/lose.png"
-import left_hand_winner from "../../assets/Images/left_hand_winner.jpg";
-import left_hand_looser from "../../assets/Images/left_hand_looser.jpg";
-import right_hand_winner from "../../assets/Images/right_hand_winner.jpg";
-import right_hand_looser from "../../assets/Images/right_hand_looser.jpg";
+import {FaCrown} from "react-icons/fa"
 import draw from "../../assets/Images/draw.png"
 import draw_match from "../../assets/Images/draw_match.jpg"
 
@@ -19,9 +12,6 @@ const Draw_match = () => {
      const {newResult,localSocket}:any = useContext(SocketContext)
     const [playerOne,setPlayerOne] = useState<IUser|undefined>()
     const [playerTwo,setPlayerTwo] = useState<IUser|undefined>()
-    console.log('playerOne:', playerOne)
-    console.log('playerTwo:', playerTwo)
-    console.log('newResult:', newResult)
     useEffect(()=>{
         if(newResult){
             let pl1 = Object.keys(newResult.tie_data.players)[0]
