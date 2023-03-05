@@ -99,20 +99,12 @@ justify-content: center;
     justify-content: center;
   }
   
-  
-  
-
-
-
 .draw_match_container{
-
+  height: 100%;
+  width: 100%;
+  position: relative;
 }
-.draw_content{
 
-}
-.styles.draw_navigation_div{
-
-}
 
 
 

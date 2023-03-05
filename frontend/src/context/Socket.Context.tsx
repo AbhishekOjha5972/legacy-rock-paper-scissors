@@ -34,17 +34,9 @@ const SocketContextProvider = ({ children }: { children: React.ReactNode }) => {
   let flag  = true
 
 
-
-  console.log("playerOne:", playerOne);
-  console.log("playerTwo:", playerTwo);
-  console.log("currentRoom:", currentRoom);
-  console.log("responseMessage:", responseMessage);
-
   if (playerOne?.chance == false && playerTwo?.chance == false) {
     const pl1 = Object.keys(currentRoom?.players)[0];
     const pl2 = Object.keys(currentRoom?.players)[1];
-
-    console.log("ME TOP PER HOON ISLIYE");
 
     //! This Condition for rock winner.
     if (playerOne!.choosen == "rock" && playerTwo!.choosen === "scissors") {
@@ -81,31 +73,9 @@ const SocketContextProvider = ({ children }: { children: React.ReactNode }) => {
 
   // // * THIS CONDITION WILL SHOW YOU SCORE.
   if (playerOne?.lives == 0 && playerTwo?.lives == 0 && flag==true) {
-    console.log("baby")
     const pl1 = Object.keys(currentRoom?.players)[0];
     const pl2 = Object.keys(currentRoom?.players)[1];
 
-
-    // if (currentRoom?.players[pl1].score > currentRoom?.players[pl2].score) {
-    //   setResult({
-    //     ...result,
-    //     status: "winner",
-    //     winner: currentRoom?.players[pl1],
-    //     looser: currentRoom?.players[pl2],
-    //   });
-      
-    // } else if (
-    //   currentRoom?.players[pl2].score > currentRoom?.players[pl1].score
-    // ) {
-    //   setResult({
-    //     ...result,
-    //     status: "winner",
-    //     winner: currentRoom?.players[pl2],
-    //     looser: currentRoom?.players[pl1],
-    //   });
-    // } else {
-    //   setResult({ ...result, status: "tie", tie: currentRoom });
-    // }
 
     //! test everything with new result formate
     if (currentRoom?.players[pl1].score > currentRoom?.players[pl2].score) {
@@ -162,13 +132,11 @@ const SocketContextProvider = ({ children }: { children: React.ReactNode }) => {
     let socket = io("http://localhost:3000");
     setLocalSocket(socket);
     socket.on("room-created", (res, specificRoom) => {
-      console.log("res:", res, specificRoom);
       setCurrentRoom(specificRoom);
       setPlayerOne(specificRoom.players[socket.id]);
     });
 
     socket.on("join_room", (res, room) => {
-      console.log("res:", res, room);
       setCurrentRoom(room);
       setPlayerOne(room.players[Object.keys(room.players)[0]]);
       setPlayerTwo(room.players[Object.keys(room.players)[1]]);
@@ -200,13 +168,11 @@ const SocketContextProvider = ({ children }: { children: React.ReactNode }) => {
 
   const handleRoomCreator = (name: string, room_name: string) => {
     localSocket.emit("create_room", name, room_name);
-    console.log("navigation working")
     nav("/game");
   };
 
   const handleJoinRoom = (name: string, room_name: string) => {
     localSocket.emit("join_room", name, room_name);
-    console.log("navigation working")
     nav("/game");
   };
 
@@ -217,7 +183,6 @@ const SocketContextProvider = ({ children }: { children: React.ReactNode }) => {
 
   //? UPDATE THE WHOLE ROOM FUNCTION
   const handleUpdateRoom = (selectedOption: string) => {
-    console.log("ME BOTTOM PER HOON PER HOON ISLIYE");
     currentRoom!.players[localSocket.id].choosen = selectedOption;
     currentRoom!.players[localSocket.id].chance = false;
     currentRoom!.players[localSocket.id].lives -= 1;

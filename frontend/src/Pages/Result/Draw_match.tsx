@@ -37,11 +37,11 @@ const Draw_match = () => {
 <div className={styles.won_content}>
                 {/* //? STATUS SHOW DIV */}
                 <div className={styles.won_and_lose_status}>
-                    <img src={draw}/>
+                    <img src={draw} />
                 </div>
                 {/* //? WINNER AND LOOSER IMAGE SHOW DIV */}
                 <div className={styles.won_and_lose_avatar}>
-                    <img src={draw_match} />
+                    <img src={draw_match}  />
                 </div>
                 
                 {/* //? SCORE STATISTIC*/}
@@ -58,7 +58,7 @@ const Draw_match = () => {
                      </div>
                      <div>
                      <div>
-                            <FaSadCry color='#ffe701'/>
+                            <FaCrown color='#ffe701'/>
                         </div>
                         <div>
                             <span>{playerTwo?.user_name}</span>

@@ -8,7 +8,6 @@ const io = require("socket.io")(3000, {
   let rooms = [];
 
   io.on('connection',(socket)=>{
-    console.log("socket Id",socket.id)
         socket.on("create_room",(user_name,room_name)=>{     
             const existing_room_with_same_name = rooms.filter((ele)=>ele.roomName===room_name)
             if(existing_room_with_same_name.length<=0){
@@ -46,7 +45,6 @@ const io = require("socket.io")(3000, {
                 existing_room_with_same_name[0].players[socket.id]={user_name,score:0,lives:3,chance:true,choosen:null}
                 existing_room_with_same_name[0].vacant=false
                 socket.join(room_name)
-                // console.log('rooms:', rooms)
                 io.to(room_name).emit("join_room",`${user_name} successfully joined ${room_name} room.`,
                 existing_room_with_same_name[0]
                 )

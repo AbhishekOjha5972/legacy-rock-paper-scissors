@@ -31,8 +31,6 @@ const Game = () => {
     if (currentRoom) {
       let pl1 = Object.keys(currentRoom.players)[0];
       let pl2 = Object.keys(currentRoom.players)[1];
-      console.log("pl1:", pl1);
-      console.log("pl2:", pl2);
       setIsDisable(currentRoom.players[localSocket.id].chance)
 
       if (pl1 && pl2) {
