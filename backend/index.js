@@ -1,6 +1,6 @@
 const io = require("socket.io")(3000, {
     cors: {
-      origin: ["http://localhost:5173"],
+      origin: ["https://legacy-rock-paper-scissors.netlify.app/"],
     },
   });
 
